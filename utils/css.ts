@@ -49,11 +49,11 @@ export const THEME_DARK: IColorScheme = {
     },
 
     screen: {
-        bg: "hsl(207 39% 5%)"
+        bgClr: "hsl(207 39% 5%)"
     },
     
     button: {
-        primary: { bgColor: "white", clr: "black", border: "none" }
+        primary: { bgClr: "white", clr: "black", border: "none" }
     },
 
     styling: STYLING_DATA

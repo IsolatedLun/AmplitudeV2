@@ -1,0 +1,25 @@
+meta {
+  name: Edit_User
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:{{port}}/users/edit
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+body:form-urlencoded {
+  username: sigma123
+  password: 123123123
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

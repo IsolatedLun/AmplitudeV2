@@ -26,7 +26,7 @@ const RootWrapper = () => {
                 headerShown: false,
                 contentStyle: {
                     position: "relative",
-                    backgroundColor: screen.bg,
+                    backgroundColor: screen.bgClr,
                     paddingBlockStart: insets.top + styling.screen.paddingTop,
                     paddingBlockEnd: insets.bottom + styling.screen.paddingBottom,
                     paddingInline: (insets.left + insets.right) + styling.screen.paddingInline

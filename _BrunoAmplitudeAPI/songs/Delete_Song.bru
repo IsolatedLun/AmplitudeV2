@@ -1,0 +1,24 @@
+meta {
+  name: Delete_Song
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:{{port}}/songs/delete/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

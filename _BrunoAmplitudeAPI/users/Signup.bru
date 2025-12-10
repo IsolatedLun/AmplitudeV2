@@ -1,0 +1,27 @@
+meta {
+  name: Signup
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:{{port}}/users/signup
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  username: sigma123
+  password: 12345678
+  repeatPassword: 12345678
+}
+
+body:multipart-form {
+  username: wow
+  password: 234234
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

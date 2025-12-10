@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { ColorSchemeContext } from "../contexts/ColorSchemeContext";
 import Icon from "../typography/Icon";
-import { EIcon_Size, ETypography_FontSize, ETypography_FontType } from "../typography/types";
+import { EIcon_Size, EIcon_Theme, ETypography_FontSize, ETypography_FontType } from "../typography/types";
 import Typo from "../typography/Typo";
 import { EButtonBorderRadius, EButtonPaddding, EButtonPaddingSize, EButtonTheme, IButton } from "./types";
 
@@ -27,7 +27,7 @@ const Btn = (props: IButton) => {
         >
             <View style={{ 
                     position: "relative",
-                    backgroundColor: _themes[props.theme ?? EButtonTheme.Primary].backgroundColor,
+                    backgroundColor: _themes[props.theme ?? EButtonTheme.Primary].bgClr,
                     paddingBlock: paddingSize[props.paddingSize ?? EButtonPaddingSize.Default] 
                         * (props.paddingMode && props.paddingMode === EButtonPaddding.Rectangle ? 2 : 1),
 
@@ -43,11 +43,11 @@ const Btn = (props: IButton) => {
                     ...props.style as any,
                 }}
             >
-                { props.icon ? <Icon name={props.icon} size={EIcon_Size.Medium} /> : null }
+                { props.icon ? <Icon name={props.icon} size={EIcon_Size.Medium} theme={EIcon_Theme.Primary} /> : null }
 
                 <Typo
                     style={{ 
-                        color: _themes[props.theme ?? EButtonTheme.Primary].color ?? text.default,
+                        color: _themes[props.theme ?? EButtonTheme.Primary].clr ?? text.default,
                     }}
                     fontSize={ETypography_FontSize.Default} 
                     fontType={ETypography_FontType.Bold}

@@ -40,11 +40,11 @@ export interface IColorScheme {
     },
 
     screen: {
-        bg: string
+        bgClr: string
     },
 
     button: {
-        primary: { bgColor: string, clr: string, border: string | null }
+        primary: { bgClr: string, clr: string, border: string | null }
     },
 
     styling: IGlobalStyles

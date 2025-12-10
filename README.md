@@ -1,50 +1,102 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Welcome to Amplitude.v2
+A simple music app made with expo + react native.
 
 ## Get started
 
-1. Install dependencies
+1. Install dependencies:
+   Run `_init.bat`;
 
-   ```bash
-   npm install
-   ```
+2. Start app + server:
+   Run `_run.bat`
 
-2. Start the app
+3. Update packages if needed:
+   Run `npx expo install --fix`
 
-   ```bash
-   npx expo start
-   ```
+OR
 
-In the output, you'll find options to open the app in a
+1. `[open cmd in root folder] => npm install && cd server && npm install && cd .. && npm run start`
+2. `[open cmd in root/server folder] => npm run dev`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- [How to setup your own S3 bucket](https://www.youtube.com/watch?v=eQAIojcArRY)
 
-## Get a fresh project
+***(root dir) .env***
+```
+ACCESS_KEY=...
+SECRET_ACCESS_KEY=...
 
-When you're ready, run:
+BUCKET_NAME=...
+BUCKET_REGION=...
+SONG_IMAGE_FOLDER_PATH=...
+SONG_AUDIO_FOLDER_PATH=...
 
-```bash
-npm run reset-project
+MONGO_URI=...
+FRONTEND_IP=...
+LOCAL_IP=...
+PORT=...
+
+JWT_SECRET_KEY=...
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+### Technologies used
+- Bruno (API testing, like postman or insomnia)
+- React native + expo (frontend)
+- MongoDB (database)
+- AWS S3 (file storage)
+=> AMERN or MERNA stack (invented by me)
 
-To learn more about developing your project with Expo, look at the following resources:
+### Other Technologies used
+- [HaiKei](https://haikei.app/) (Used to generate the epic svg backgrounds seen in the app)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Why I used these technologies
+- **React Native** + **Expo** is an obvious one.
+- I've never used **MongoDB** before and thought it would cool to make a project with it.
+- Since **MongoDB** is document based and has limitations storing files (it took 30s to receive ±2mb files stored in binary), and while I could've used the **GridFS_API** provided by them. I decided to use and learn **AWS S3** + it's a really valuabe skill.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+### Features
+- Signup/Login/Auth [WIP]
+- Upload/Play/Edit/Delete songs
+- Settings + Profile pages
+- Light/Dark mode *(works but light mode is disabled)*
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+#### Most Notable Packages Used:
+- [DocumentPicker](https://www.npmjs.com/package/expo-document-picker)
+- [ImagePicker](https://www.npmjs.com/package/expo-image-picker)
+- [AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+- [SecureStore](https://www.npmjs.com/package/expo-secure-store)
+- [Reanimated](https://www.npmjs.com/package/react-native-reanimated)
+- [Expo Audio](https://www.npmjs.com/package/expo-audio)
+- [Slider](https://docs.expo.dev/versions/latest/sdk/slider/)
+- [Yup](https://www.npmjs.com/package/yup) (frontend validation)
+- [Formik](https://formik.org/)
+
+<br>
+
+- [Express](https://www.npmjs.com/package/express)
+- [Express/CORS](https://www.npmjs.com/package/cors)
+- [Express/Multer](https://www.npmjs.com/package/multer) (file upload middleware)
+- [Express/Rate-Limit](https://www.npmjs.com/package/express-rate-limit)
+- [Express/Morgan](https://www.npmjs.com/package/morgan) (logging)
+- [MongoDB](https://www.npmjs.com/package/mongodb)
+- [AWS S3](https://www.npmjs.com/package/@aws-sdk/client-s3)
+- [UUID](https://www.npmjs.com/package/react-native-uuid) (for generating rand ids + tokens)
+- [Sharp](https://www.npmjs.com/package/sharp) (image processing)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Joi](https://www.npmjs.com/package/joi) (backend validation)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt) (password hashing)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+
+##### Known issues
+- While editing works, even if the files are the same they get overriden => time + resources are wasted. While I can fix this by checking if the old/new md5 hashes have changed, im lazy for that + this app is not for public use :)
+- Not inherently an issue, but the code could be more consistent and cleaner.
+- Expo audio is sometimes glitchy with `loop`, `isPlaying`, `volume` states.
+- Light theme is ugly, need to play around with colors.
+- Some minor (hopefully) bugs may introduce themselves due to me not testing individual components.
+
+##### Solved Issues
+- Due to the way expo handles local files, I cant get the file info during editing, so I cant provide the input with the file name and size (thats why i just show `Change [Image/Audio] File`). [SOLVED]
+  - Solution: By using the deprecated legacy version of `expo-file-system`, I was able to extract the file info.

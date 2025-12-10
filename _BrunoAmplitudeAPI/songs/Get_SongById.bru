@@ -1,0 +1,20 @@
+meta {
+  name: Get_SongById
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:{{port}}/songs/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 693737eb179bda2394fd1c7e
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

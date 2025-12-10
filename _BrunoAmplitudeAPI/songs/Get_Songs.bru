@@ -1,0 +1,16 @@
+meta {
+  name: Get_Songs
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:{{port}}/songs
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -10,9 +10,19 @@ export default function Index() {
     <View style={styles.container}>
       <LandingSvg style={styles.landingSvg} />
 
-      <CenterContainer alignCenter>
-          <Typo fontSize={ETypography_FontSize.Gigantic} fontType={ETypography_FontType.Bold}>Amplitude</Typo>
-          <Btn text="Login" icon="login" />
+      <CenterContainer style={styles.contentContainer}>
+          <Typo 
+            center
+            fontSize={ETypography_FontSize.Gigantic} 
+            fontType={ETypography_FontType.Bold}
+          >
+              Amplitude
+          </Typo>
+          
+          <View style={styles.btnContainer}>
+            <Btn text="Sign up" icon="login-variant" iconOrientation="row-reverse" />
+            <Btn text="Login" icon="login" iconOrientation="row-reverse" />
+          </View>
       </CenterContainer>
     </View>
   );
@@ -20,5 +30,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: { position: "static", flex: 1 },
-  landingSvg: { position: "absolute", inset: -50 }
+  contentContainer: { gap: 32 },
+  landingSvg: { position: "absolute", inset: -50 },
+  btnContainer: { gap: 16 }
 })

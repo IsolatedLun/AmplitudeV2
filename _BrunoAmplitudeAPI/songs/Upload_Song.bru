@@ -1,0 +1,33 @@
+meta {
+  name: Upload_Song
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:{{port}}/songs/upload
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+body:form-urlencoded {
+  title: 123
+  author: 234
+  image: 
+}
+
+body:multipart-form {
+  title: 123
+  author: 123
+  ~image: @file()
+  ~audio: @file()
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
