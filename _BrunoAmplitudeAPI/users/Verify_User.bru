@@ -1,0 +1,20 @@
+meta {
+  name: Verify_User
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:{{port}}/users/verify
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

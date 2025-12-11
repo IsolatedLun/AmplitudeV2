@@ -28,13 +28,15 @@ export interface IGlobalStyles {
     } & ISizeOptions
 }
 
+export type TThemeSpec = { bgClr: string, clr: string, border: string | null };
 export type TAppThemes = "light" | "dark";
 export interface IColorScheme {
     deviceTheme: TAppThemes,
-    text: {
+    theme: {
         default: string,
         inverted: string,
-        theme: string,
+        
+        primary: string,
         muted: string,
         error: string
     },
@@ -44,7 +46,11 @@ export interface IColorScheme {
     },
 
     button: {
-        primary: { bgClr: string, clr: string, border: string | null }
+        primary: TThemeSpec
+    },
+
+    input: {
+        primary: TThemeSpec
     },
 
     styling: IGlobalStyles

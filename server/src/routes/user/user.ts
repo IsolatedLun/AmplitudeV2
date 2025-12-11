@@ -18,8 +18,12 @@ UserRouter.get("/", async(req, res) => {
 });
 
 // ========================================
-// Login/Signup/Edit/Logout
+// Verify/Login/Signup/Edit/Logout
 // ========================================
+UserRouter.post("/verify", jwtProtectedRoute, async(req, res) => {
+    res.status(200).send({ user: (req as any).auth });
+})
+
 UserRouter.post("/login", async(req, res) => {
     const { value, error } = loginValidationSchema.validate(req.body);
     if(error) return res.status(400).send({ error: error.message });
@@ -29,7 +33,7 @@ UserRouter.post("/login", async(req, res) => {
         .findOne({ username });
     
     if(!user)
-        return res.status(400).send({ error: "Incorrect username/password" });
+        return res.status(400).json({ error: "Incorrect username/password" });
 
     const doPasswordsMatch = await bcrypt.compare(password, user.password);
     if(!doPasswordsMatch) return res.status(400).send({ error: "Incorrect username/password" });

@@ -39,11 +39,11 @@ const STYLING_DATA: IGlobalStyles = {
 
 export const THEME_DARK: IColorScheme = {
     deviceTheme: "dark",
-    text: {
+    theme: {
         default: "white",
         inverted: "black",
 
-        theme: "hsl(150 70% 50%)",
+        primary: "hsl(150 70% 50%)",
         muted: "hsl(0 0% 60%)",
         error: "hsl(5 67% 50%)"
     },
@@ -54,6 +54,10 @@ export const THEME_DARK: IColorScheme = {
     
     button: {
         primary: { bgClr: "white", clr: "black", border: "none" }
+    },
+
+    input: {
+        primary: { bgClr: "hsl(0 0% 8%)", clr: "hsl(0 0% 40%)", border: "none" }
     },
 
     styling: STYLING_DATA

@@ -4,11 +4,11 @@ import { ColorSchemeContext } from "../contexts/ColorSchemeContext";
 import { EIcon_Size, EIcon_Theme, IIcon } from "./types";
 
 const Icon = (props: IIcon) => {
-    const { state: { text, styling } } = useContext(ColorSchemeContext);
+    const { state: { theme, styling } } = useContext(ColorSchemeContext);
     const _themes: Record<EIcon_Theme, string> = {
-        [EIcon_Theme.Default]: text.default,
-        [EIcon_Theme.Primary]: text.theme,
-        [EIcon_Theme.Muted]: text.muted
+        [EIcon_Theme.Default]: theme.default,
+        [EIcon_Theme.Primary]: theme.primary,
+        [EIcon_Theme.Muted]: theme.muted
     };
     const _sizes: Record<EIcon_Size, number> = {
         [EIcon_Size.Default]: styling.iconSize.default,

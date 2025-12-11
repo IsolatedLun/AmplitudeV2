@@ -7,10 +7,10 @@ import Typo from "../typography/Typo";
 import { EButtonBorderRadius, EButtonPaddding, EButtonPaddingSize, EButtonTheme, IButton } from "./types";
 
 const Btn = (props: IButton) => {
-    const { state: { text, button, styling } } = useContext(ColorSchemeContext);
+    const { state: { theme, button, styling } } = useContext(ColorSchemeContext);
     const _themes: Record<EButtonTheme, any> = {
         [EButtonTheme.Primary]: button.primary,
-        [EButtonTheme.Danger]: { backgroundColor: text.error, color: null }
+        [EButtonTheme.Danger]: { backgroundColor: theme.error, color: null }
     };
     const borderRadius: Record<EButtonBorderRadius, number> = {
         [EButtonBorderRadius.Cube]: styling.borderRadius.cubeRadius,
@@ -47,7 +47,7 @@ const Btn = (props: IButton) => {
 
                 <Typo
                     style={{ 
-                        color: _themes[props.theme ?? EButtonTheme.Primary].clr ?? text.default,
+                        color: _themes[props.theme ?? EButtonTheme.Primary].clr ?? theme.default,
                     }}
                     fontSize={ETypography_FontSize.Default} 
                     fontType={ETypography_FontType.Bold}

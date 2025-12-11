@@ -1,3 +1,5 @@
+import { RUserLogin_Ok } from "@/api/user/types"
+
 export interface IUser {
     _id: string,
     username: string,
@@ -8,6 +10,6 @@ export interface IUser {
 export interface IAuthUserContext {
     user: IUser | null,
 
-    login: (v: IUser, tok: string) => Promise<void>,
+    login: (data: RUserLogin_Ok) => Promise<void>,
     logout: () => void
 }

@@ -10,17 +10,17 @@ import {
 } from "./types";
 
 const Typo = (props: ITypography) => {
-    const { state: { text, styling } } = useContext(ColorSchemeContext);
+    const { state: { theme, styling } } = useContext(ColorSchemeContext);
     const _fontType: Record<ETypography_FontType, TTypography_FontFamily> = {
         [ETypography_FontType.Regular]: "FontRegular",
         [ETypography_FontType.Bold]: "FontBold"
     };
     const _themes: Record<ETypography_Theme, string> = {
-        [ETypography_Theme.Default]: text.default,
+        [ETypography_Theme.Default]: theme.default,
         
-        [ETypography_Theme.Theme]: text.theme,
-        [ETypography_Theme.Muted]: text.muted,
-        [ETypography_Theme.Error]: text.error
+        [ETypography_Theme.Theme]: theme.primary,
+        [ETypography_Theme.Muted]: theme.muted,
+        [ETypography_Theme.Error]: theme.error
     };
     const _fontSize: Record<ETypography_FontSize, number> = {
         [ETypography_FontSize.Default]: styling.fontSize.default,
