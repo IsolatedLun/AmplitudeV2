@@ -1,3 +1,4 @@
+import { TThemeSpec } from "@/utils/types";
 import { useContext } from "react";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { ColorSchemeContext } from "../contexts/ColorSchemeContext";
@@ -8,9 +9,9 @@ import { EButtonBorderRadius, EButtonPaddding, EButtonPaddingSize, EButtonTheme,
 
 const Btn = (props: IButton) => {
     const { state: { theme, button, styling } } = useContext(ColorSchemeContext);
-    const _themes: Record<EButtonTheme, any> = {
+    const _themes: Record<EButtonTheme, TThemeSpec> = {
         [EButtonTheme.Primary]: button.primary,
-        [EButtonTheme.Danger]: { backgroundColor: theme.error, color: null }
+        [EButtonTheme.Danger]: button.error
     };
     const borderRadius: Record<EButtonBorderRadius, number> = {
         [EButtonBorderRadius.Cube]: styling.borderRadius.cubeRadius,
@@ -61,7 +62,7 @@ const Btn = (props: IButton) => {
                     props.loading
                     ? <ActivityIndicator 
                             style={{ position: "absolute", inset: 0 }} 
-                            color={_themes[props.theme ?? EButtonTheme.Primary].backgroundColor}
+                            color={_themes[props.theme ?? EButtonTheme.Primary].bgClr}
                         />
                     : null
                 }

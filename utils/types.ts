@@ -25,6 +25,10 @@ export interface IGlobalStyles {
 
     iconSize: {
         page: number
+    } & ISizeOptions,
+
+    iconButtonSize: {
+        page: number
     } & ISizeOptions
 }
 
@@ -46,11 +50,12 @@ export interface IColorScheme {
     },
 
     button: {
-        primary: TThemeSpec
+        primary: TThemeSpec,
+        error: TThemeSpec
     },
 
     input: {
-        primary: TThemeSpec
+        primary: TThemeSpec,
     },
 
     styling: IGlobalStyles

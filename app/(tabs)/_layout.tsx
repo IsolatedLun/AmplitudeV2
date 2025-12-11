@@ -1,4 +1,3 @@
-import MainBackground from "@/components/containers/backgrounds/MainBackground";
 import { ColorSchemeContext } from "@/components/contexts/ColorSchemeContext";
 import Navbar from "@/components/misc/Navbar";
 import Icon from "@/components/typography/Icon";
@@ -35,7 +34,6 @@ const MainLayout = () => {
 
     return(
         <>
-            <MainBackground />
             <Navbar />
             <Tabs screenOptions={{
                 headerShown: false,

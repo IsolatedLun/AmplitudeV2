@@ -34,6 +34,18 @@ const STYLING_DATA: IGlobalStyles = {
         gigantic: 46,
 
         page: 54
+    },
+
+    iconButtonSize: {
+        default: 13,
+        
+        small: 9,
+        medium: 16,
+        large: 30,
+        huge: 40,
+        gigantic: 46,
+
+        page: 54
     }
 }
 
@@ -53,7 +65,8 @@ export const THEME_DARK: IColorScheme = {
     },
     
     button: {
-        primary: { bgClr: "white", clr: "black", border: "none" }
+        primary: { bgClr: "white", clr: "black", border: "none" },
+        error: { bgClr: "hsl(5 67% 50%)", clr: "white", border: "none" }
     },
 
     input: {
