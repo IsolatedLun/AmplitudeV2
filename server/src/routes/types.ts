@@ -5,7 +5,7 @@ export interface IBackendUser {
     username: string,
     password: string,
     profile: string,
-    favorites: ObjectId[]
+    favorites: string[]
 
     createdAt: Date
 }

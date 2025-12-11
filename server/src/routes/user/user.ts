@@ -4,7 +4,7 @@ import * as jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
 import mongoClient from "../../connections/mongo";
 import { envVariables, jwtProtectedRoute } from "../../globals";
-import { IBackendUser } from "../types";
+import { IBackendSong, IBackendUser } from "../types";
 import { editUserValidationSchema, loginValidationSchema, signUpValidationSchema } from "./schemas";
 
 const UserRouter = express.Router();
@@ -18,8 +18,35 @@ UserRouter.get("/", async(req, res) => {
 });
 
 // ========================================
-// Verify/Login/Signup/Edit/Logout
+// Toggle-favorite/Verify/Login/Signup/Edit/Logout
 // ========================================
+UserRouter.post("/toggle-favorite/:id", jwtProtectedRoute, async(req, res) => {
+    const authUser = (req as any).auth;
+    const { id } = req.params as { id: string };
+    if(!ObjectId.isValid(id))
+        return res.status(400).send({ error: `<${id}> is not a valid id` });
+    
+    const song = await mongoClient.collection<IBackendSong>("song").findOne({ _id: new ObjectId(id) });
+    if(!song)
+        return res.status(404).send({ error: `Song with id <${id}> does not exist` });
+
+    const userCollection = mongoClient.collection<IBackendUser>("user");
+    const user = await userCollection.findOne({ username: authUser.username }) as IBackendUser;
+    const exists = user.favorites.includes(id);
+
+    if(exists)
+        user.favorites = user.favorites.filter(x => x !== id)
+    else
+        user.favorites.push(id);
+    
+    await userCollection.updateOne(
+        { _id: new ObjectId(user._id) }, 
+        { $set: { favorites: user.favorites } }
+    );
+
+    res.status(200).send({ toggledId: id, ok: true, removed: exists });
+});
+
 UserRouter.post("/verify", jwtProtectedRoute, async(req, res) => {
     res.status(200).send({ user: (req as any).auth });
 })

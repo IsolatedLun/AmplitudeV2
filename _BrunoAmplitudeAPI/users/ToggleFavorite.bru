@@ -1,0 +1,28 @@
+meta {
+  name: ToggleFavorite
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/users/toggle-favorite/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: 693b4f5c5737d114c1d9769b
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+body:form-urlencoded {
+  id: 
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

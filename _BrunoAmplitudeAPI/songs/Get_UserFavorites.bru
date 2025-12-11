@@ -1,0 +1,20 @@
+meta {
+  name: Get_UserFavorites
+  type: http
+  seq: 6
+}
+
+get {
+  url: http:localhost:{{port}}/songs/favorites
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
