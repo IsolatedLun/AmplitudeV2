@@ -4,7 +4,7 @@ import axios from "axios";
 import { RResetApp_Ok } from "./types";
 
 const IndexApiInstance = axios.create({
-    baseURL: SERVER_URL + "/"
+    baseURL: SERVER_URL
 });
 
-export const IndexApi_ResetApp = (tok: string) => IndexApiInstance.post<RResetApp_Ok>("/reset", {}, { headers: createAuthHeader(tok) });
+export const IndexApi_ResetApp = (tok: string) => IndexApiInstance.delete<RResetApp_Ok>("/reset", { headers: createAuthHeader(tok) });

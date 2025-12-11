@@ -2,6 +2,7 @@ import { IResponse_Err } from "@/api/types";
 import { Yup_SignupValidationSchema } from "@/api/user/schemas";
 import { TUserSignupForm } from "@/api/user/types";
 import { UserApi_Signup } from "@/api/user/userApi";
+import Anchor from "@/components/anchor/Anchor";
 import Btn from "@/components/buttons/Btn";
 import IndexBackground from "@/components/containers/backgrounds/IndexBackground";
 import CenterContainer from "@/components/containers/CenterContainer";
@@ -73,6 +74,7 @@ const SignupPage = () => {
 
                             <View style={styles.loginSubmitContainer}>
                                 <Btn text="Sign up" icon="login-variant" onPress={submitForm} />
+                                <Anchor text="Already have an account?" href="./login" />
                                 {
                                     signupError 
                                     ? (

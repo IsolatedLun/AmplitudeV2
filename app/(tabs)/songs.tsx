@@ -24,7 +24,7 @@ const SongsTab = () => {
         ? <ErrorContainer retryFn={retryFn} />
         : (
             (
-            <View>
+            <View style={styles.container}>
                 <WordInput 
                     onInput={setSearchValue}
                     value={searchValue} 
@@ -44,6 +44,9 @@ const SongsTab = () => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     songContainer: {
         marginBlockStart: 20,
         gap: 20

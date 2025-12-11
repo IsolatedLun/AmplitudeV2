@@ -49,7 +49,7 @@ const SongPlayer = (props: IFrontendSongFull) => {
                     <IconButton 
                         name="arrow-left"
                         theme={EIconButton_Theme.Transparent}
-                        size={EIconButton_Size.Huge}
+                        size={EIconButton_Size.Large}
                         onPress={handleGoBack}
                     />
                 </View>
@@ -80,7 +80,7 @@ const SongPlayer = (props: IFrontendSongFull) => {
                     <IconButton
                         name={!player.currentStatus.mute ? "volume-high" : "volume-mute"} 
                         theme={EIconButton_Theme.Transparent}
-                        size={EIconButton_Size.Huge}
+                        size={EIconButton_Size.Large}
                         onPress={handleVolumePress} 
                     />
 
@@ -93,7 +93,7 @@ const SongPlayer = (props: IFrontendSongFull) => {
                     <IconButton 
                         name={!player.currentStatus.loop ? "repeat-off" : "repeat"} 
                         theme={EIconButton_Theme.Transparent}
-                        size={EIconButton_Size.Huge}
+                        size={EIconButton_Size.Large}
                         onPress={handleLoopPress} 
                     />
                 </View>

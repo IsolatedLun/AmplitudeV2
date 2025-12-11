@@ -4,6 +4,7 @@ import { rateLimit } from "express-rate-limit";
 import morgan from "morgan";
 import { s3 } from "./connections/aws";
 import mongoClient from "./connections/mongo";
+import { jwtProtectedRoute } from "./globals";
 import SongRouter from "./routes/song/song";
 import { IBackendSong, IBackendUser } from "./routes/types";
 import UserRouter from "./routes/user/user";
@@ -39,7 +40,7 @@ app.use(cors({
 app.use("/songs", SongRouter);
 app.use("/users", UserRouter);
 
-app.delete("/reset", async(req, res) => {
+app.delete("/reset", jwtProtectedRoute, async(req, res) => {
     const userCollection = mongoClient.collection<IBackendUser>("user");
     const songCollection = mongoClient.collection<IBackendSong>("song");
 

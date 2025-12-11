@@ -58,6 +58,10 @@ export interface IColorScheme {
         primary: TThemeSpec,
     },
 
+    card: {
+        primary: TThemeSpec,
+    },
+
     styling: IGlobalStyles
 }
 

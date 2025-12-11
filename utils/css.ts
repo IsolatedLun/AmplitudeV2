@@ -69,6 +69,10 @@ export const THEME_DARK: IColorScheme = {
         error: { bgClr: "hsl(5 67% 50%)", clr: "white", border: "none" }
     },
 
+    card: {
+        primary: { bgClr: "hsl(0 0% 16%)", clr: "black", border: "none" },
+    },
+    
     input: {
         primary: { bgClr: "hsl(0 0% 8%)", clr: "hsl(0 0% 40%)", border: "none" }
     },

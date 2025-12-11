@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from "expo-router";
 import { useContext, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AuthUserContext } from './contexts/AuthProvider';
 import { ColorSchemeContext } from './contexts/ColorSchemeContext';
 
 SplashScreen.preventAutoHideAsync();
@@ -14,6 +15,7 @@ const RootWrapper = () => {
     });
 
     const { state: { screen, styling } } = useContext(ColorSchemeContext);
+    const { user } = useContext(AuthUserContext);
     const insets = useSafeAreaInsets();
 
     useEffect(() => {
@@ -33,7 +35,16 @@ const RootWrapper = () => {
                 }
             }}
             initialRouteName='index'
-        />
+        >
+            <Stack.Screen name="index" />
+
+            <Stack.Protected guard={user === null}>
+                <Stack.Screen name="auth/login" />
+            </Stack.Protected>
+            <Stack.Protected guard={user !== null}>
+                <Stack.Screen name="(tabs)" />
+            </Stack.Protected>
+        </Stack>
     )
 };
 

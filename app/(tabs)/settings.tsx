@@ -4,12 +4,13 @@ import { AuthUserContext } from "@/components/contexts/AuthProvider";
 import EditUserInfo from "@/page_components/settings/EditUserInfo";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 const SettingsTab = () => {
     const router = useRouter();
     const { user, logout } = useContext(AuthUserContext);
+    const [isResetting, setIsResetting] = useState(false);
 
     function handleLogoutPress() {
         logout();
@@ -17,9 +18,13 @@ const SettingsTab = () => {
     }
 
     async function handleResetAppData() {
+        setIsResetting(true);
+
         const tok = await SecureStore.getItemAsync("tok");
-        IndexApi_ResetApp(tok!)
+        await IndexApi_ResetApp(tok!)
             .then(() => logout());
+
+        setIsResetting(false);
     }
 
     return(
@@ -32,6 +37,7 @@ const SettingsTab = () => {
                     onPress={handleResetAppData}
                     text="Reset app data" 
                     icon="trash-can"
+                    loading={isResetting}
                 />
             </View>
         </View>

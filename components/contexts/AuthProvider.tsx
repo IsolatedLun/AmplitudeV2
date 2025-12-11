@@ -29,6 +29,7 @@ const AuthProvider = ({ children } : { children: React.ReactNode }) => {
     async function logout() {
         await SecureStore.deleteItemAsync("tok");
         setUser(null);
+        router.replace("/");
     }
     
     return(
