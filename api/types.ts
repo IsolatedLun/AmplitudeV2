@@ -24,5 +24,5 @@ export interface IFrontendSongFull extends IFrontendSongPreview {
     audio: string
 };
 
-export type TSongForm = Omit<IFrontendSongFull, "_id", "isFavorite">;
+export type TSongForm = Omit<IFrontendSongFull, "_id" | "isFavorite">;
 export type TSongEditForm = TSongForm;
