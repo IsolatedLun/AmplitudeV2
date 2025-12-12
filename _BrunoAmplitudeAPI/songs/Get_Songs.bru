@@ -7,7 +7,11 @@ meta {
 get {
   url: http://localhost:{{port}}/songs/all
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{globalJwtKey}}
 }
 
 settings {

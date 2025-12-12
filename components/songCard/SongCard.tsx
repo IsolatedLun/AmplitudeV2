@@ -3,18 +3,19 @@ import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Btn from "../buttons/Btn";
-import { EButtonBorderRadius, EButtonTheme } from "../buttons/types";
+import { EButtonBorderRadius } from "../buttons/types";
 import { ColorSchemeContext } from "../contexts/ColorSchemeContext";
 import MModal from "../modal/MModal";
 import Icon from "../typography/Icon";
 import { EIcon_Size, ETypography_FontSize, ETypography_FontType, ETypography_Theme } from "../typography/types";
 import Typo from "../typography/Typo";
+import { IFrontEndSongLocal } from "./types";
 
-const SongCard = (props: IFrontendSongPreview) => {
+const SongCard = (props: IFrontendSongPreview & IFrontEndSongLocal) => {
     const router = useRouter();
     const { state: { styling } } = useContext(ColorSchemeContext);
     const [openModal, setOpenModal] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
 
     function routeToSong() {
@@ -27,11 +28,18 @@ const SongCard = (props: IFrontendSongPreview) => {
 
     function handleDeletePress() {
         setOpenModal(false);
+        props.onDelete(props._id);
+    }
+
+    function handleToggleFavoritePress() {
+        setIsFavorite(!isFavorite);
+        setOpenModal(false);
+        props.onToggleFavorite(props._id);
     }
 
     function handleEditPress() {
         setOpenModal(false);
-        router.replace(`/(tabs)/upload?editID=${props._id}`);
+        router.replace(`/edit/${props._id}` as any);
     }
 
     return(
@@ -74,16 +82,16 @@ const SongCard = (props: IFrontendSongPreview) => {
                         text={isFavorite ? "Remove from favorites" : "Add to favorites"} 
                         icon="heart" 
                         borderRadiusMode={EButtonBorderRadius.Cube}
+                        onPress={handleToggleFavoritePress}
                     />
                     <Btn 
                         text="Edit song" 
                         icon="pencil"
                         borderRadiusMode={EButtonBorderRadius.Cube}
-                        onPress={handleEditPress} 
+                        onPress={handleEditPress}
                     />
                     <Btn 
                         text="Delete song" 
-                        theme={EButtonTheme.Danger} 
                         icon="trash-can"
                         borderRadiusMode={EButtonBorderRadius.Cube} 
                         onPress={handleDeletePress}

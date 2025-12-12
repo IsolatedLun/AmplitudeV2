@@ -20,10 +20,10 @@ const AudioInput = (props: IAudioInput) => {
 
     useEffect(() => {
         if(!props.value) {
-            if(player.playing) {
-                player.pause();
-            }
             setFileInfo(null);
+        } else if(typeof props.value === "object") {
+            player.replace(props.value.uri);
+            getInfoAsync(props.value.uri).then(setFileInfo);
         }
     }, [props.value]);
 

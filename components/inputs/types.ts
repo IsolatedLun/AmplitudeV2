@@ -26,7 +26,7 @@ export interface IFileInfoCard {
 
 type IFileData = { uri: string, name: string, type: string }
 export interface IImageInput {
-    value: string,
+    value: IFileData | string,
     
     onInput: (f: IFileData) => void,
     onBlur?: (e: any) => void,
@@ -34,7 +34,7 @@ export interface IImageInput {
 }
 
 export interface IAudioInput {
-    value: string,
+    value: IFileData | string,
     
     onInput: (f: IFileData) => void,
     onBlur?: (e: any) => void,

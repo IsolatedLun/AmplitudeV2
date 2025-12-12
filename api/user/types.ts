@@ -20,3 +20,6 @@ export type RUserLogin_Err = IResponse_Err;
 
 export type RUserVerify_Ok = { user: IFrontendUser };
 export type RUserVerify_Err = IResponse_Err;
+
+export type RToggleFavoriteSong_Ok = { toggledId: string, removed: boolean } & IResponse_Ok;
+export type RToggleFavoriteSong_Err = IResponse_Err;

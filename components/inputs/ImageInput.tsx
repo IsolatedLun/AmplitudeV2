@@ -21,6 +21,9 @@ const ImageInput = (props: IImageInput) => {
             setFileInfo(null);
             setShowPreview(false);
             setPreview("");
+        } else if(typeof props.value === "object") {
+            getInfoAsync(props.value.uri).then(setFileInfo);
+            setPreview(props.value.uri);
         }
     }, [props.value]);
 

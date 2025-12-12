@@ -23,16 +23,22 @@ const songUploadMiddleWare = multerMemStorageInstance.fields([
 // ========================================
 // Get Songs
 // ========================================
-SongRouter.get("/all", async(req, res) => {
-    const collection = mongoClient.collection<IBackendSong>("song");
+SongRouter.get("/all", jwtProtectedRoute, async(req, res) => {
+    const authUser = (req as any).auth as IBackendUser;
+    const songCollection = mongoClient.collection<IBackendSong>("song");
+    const user = await mongoClient.collection<IBackendUser>("user")
+        .findOne({ username: authUser.username }) as IBackendUser;
+
     const query = req.query;
     let data = "search" in req.query 
-        ? await collection.find({ title: { $regex: `^${query.search}`, $options: "i" } }).toArray()
-        : await collection.find({}).toArray();
+        ? await songCollection.find({ title: { $regex: `^${query.search}`, $options: "i" } }).toArray()
+        : await songCollection.find({}).toArray();
 
     for(const song of data as IBackendSong[]) {
         const command = new GetObjectCommand({ Bucket: envVariables.awsBucketName, Key: song.image });
         song.image = await getSignedUrl(s3, command);
+
+        (song as any).isFavorite = user.favorites.includes(song._id.toString());
     }
 
     res.status(200).send(data);
@@ -81,7 +87,7 @@ SongRouter.get("/song/:id", async(req, res) => {
     res.status(200).send(song);
 });
 
-SongRouter.delete("/:id", jwtProtectedRoute, async(req, res) => {
+SongRouter.delete("/delete/:id", jwtProtectedRoute, async(req, res) => {
     const { id } = req.params as { id: string };
     if(!ObjectId.isValid(id))
         return res.status(400).send({ error: `<${id}> is not a valid id` });
@@ -97,7 +103,7 @@ SongRouter.delete("/:id", jwtProtectedRoute, async(req, res) => {
     await s3.send(imageCommand);
     await s3.send(audioCommand);
 
-    res.status(200).send({ tok: true });
+    res.status(200).send({ ok: true });
 });
 
 

@@ -16,12 +16,13 @@ export interface IFrontendSongPreview {
     _id: string,
     title: string,
     author: string,
-    image: string
+    image: string,
+    isFavorite: boolean
 }
 
 export interface IFrontendSongFull extends IFrontendSongPreview {
     audio: string
 };
 
-export type TSongForm = Omit<IFrontendSongFull, "_id">;
+export type TSongForm = Omit<IFrontendSongFull, "_id", "isFavorite">;
 export type TSongEditForm = TSongForm;

@@ -12,3 +12,6 @@ export type RGetSongById_Err = IResponse_Err;
 
 export type RUploadSong_Ok = { insertedId: string } & IResponse_Ok;
 export type RUploadSong_Err = IResponse_Err;
+
+export type RDeleteSong_Ok = { deletedId: string } & IResponse_Ok;
+export type RDeleteSong_Err = IResponse_Err;

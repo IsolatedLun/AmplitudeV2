@@ -1,10 +1,14 @@
+import { useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
+import Btn from "../buttons/Btn";
 import { ETypography_FontSize, ETypography_Theme } from "../typography/types";
 import Typo from "../typography/Typo";
 import CenterContainer from "./CenterContainer";
 import { IErrorContainer } from "./types";
 
 const ErrorContainer = (props: IErrorContainer) => {
+    const router = useRouter();
+
     return(
         <CenterContainer style={styles.container}>
             <Typo
@@ -16,9 +20,7 @@ const ErrorContainer = (props: IErrorContainer) => {
             </Typo>
             
             <View style={styles.buttonContainer}>
-                {
-                    // TODO: add buttons, go back/retry
-                }
+                <Btn text="Go home" icon="home" onPress={() => router.replace("/(tabs)/songs")} />
             </View>
         </CenterContainer>
     )

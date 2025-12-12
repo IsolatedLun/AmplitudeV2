@@ -1,24 +1,51 @@
-import { SongApi_GetSongs } from "@/api/song/songApi";
+import { SongApi_DeleteSong, SongApi_GetSongs } from "@/api/song/songApi";
 import { RGetSongs_Ok } from "@/api/song/types";
+import { UserApi_ToggleFavorite } from "@/api/user/userApi";
 import ErrorContainer from "@/components/containers/ErrorContainer";
 import LoadingContainer from "@/components/containers/LoadingContainer";
 import WordInput from "@/components/inputs/WordInput";
 import SongCard from "@/components/songCard/SongCard";
 import { useGetRequest } from "@/hooks/request";
 import { useFocusEffect } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { useCallback, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const SongsTab = () => {
-    const { data, loading, error, retryFn } = useGetRequest<RGetSongs_Ok>(SongApi_GetSongs, [], true);
+    const { data, loading, error, retryFn } = useGetRequest<RGetSongs_Ok>(fetchSongs(), [], true);
+    const [isBusy, setIsBusy] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
     useFocusEffect(useCallback(() => {
-        if(data.length == 0 && !loading)
-            retryFn();
+        retryFn();
     }, []));
 
-    return loading 
+    function fetchSongs() {
+        const tok = SecureStore.getItem("tok");
+        return () => SongApi_GetSongs(tok!);
+    }
+
+    async function handleDelete(id: string) {
+        setIsBusy(true);
+
+        const tok = SecureStore.getItem("tok"); 
+        await SongApi_DeleteSong(id, tok!);
+        
+        setIsBusy(false);
+        retryFn();
+    }
+
+    async function handleToggleFavorite(id: string) {
+        setIsBusy(true);
+
+        const tok = SecureStore.getItem("tok"); 
+        await UserApi_ToggleFavorite(id, tok!);
+        
+        setIsBusy(false);
+        retryFn();
+    }
+
+    return loading && !isBusy
     ? <LoadingContainer />
     : error
         ? <ErrorContainer retryFn={retryFn} />
@@ -36,7 +63,7 @@ const SongsTab = () => {
                     style={styles.songContainer}
                     contentContainerStyle={styles.songContentContainer}
                     data={data}
-                    renderItem={x => <SongCard {...x.item} />}
+                    renderItem={x => <SongCard {...x.item} onDelete={handleDelete} onToggleFavorite={handleToggleFavorite} />}
                 />
             </View>
         )
