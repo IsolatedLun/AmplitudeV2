@@ -36,13 +36,8 @@ const SongsTab = () => {
     }
 
     async function handleToggleFavorite(id: string) {
-        setIsBusy(true);
-
         const tok = SecureStore.getItem("tok"); 
         await UserApi_ToggleFavorite(id, tok!);
-        
-        setIsBusy(false);
-        retryFn();
     }
 
     return loading && !isBusy

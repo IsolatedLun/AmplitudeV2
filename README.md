@@ -96,6 +96,7 @@ JWT_SECRET_KEY=...
 
 ##### Known issues
 - While editing works, even if the files are the same they get overriden => time + resources are wasted. While I can fix this by checking if the old/new md5 hashes have changed, im lazy for that + this app is not for public use :)
+- Some errors are not handled (especially network issues)
 - Not inherently an issue, but the code could be more consistent and cleaner.
 - Expo audio is sometimes glitchy with `loop`, `isPlaying`, `volume` states.
 - Light theme is ugly, need to play around with colors.
