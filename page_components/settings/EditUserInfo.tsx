@@ -7,7 +7,7 @@ import { AuthUserContext } from "@/components/contexts/AuthProvider";
 import WordInput from "@/components/inputs/WordInput";
 import { ETypography_FontSize } from "@/components/typography/types";
 import Typo from "@/components/typography/Typo";
-import * as SecureStore from "expo-secure-store";
+import { getAuthTok } from "@/utils/funcs";
 import { Formik } from "formik";
 import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -20,7 +20,7 @@ const EditUserInfo = () => {
     async function handleUserEditSubmit(v: TUserLoginForm) {
         setLoading(true);
 
-        const tok = await SecureStore.getItemAsync("tok");
+        const tok = await getAuthTok();
         UserApi_Edit(v, tok!)
             .then(() => {
                 setLoading(false);

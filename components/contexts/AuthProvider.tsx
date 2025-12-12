@@ -1,5 +1,6 @@
 import { IFrontendUser, RUserLogin_Ok } from "@/api/user/types";
 import { UserApi_Verify } from "@/api/user/userApi";
+import { getAuthTok } from "@/utils/funcs";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import React, { createContext, useEffect, useState } from "react";
@@ -12,13 +13,17 @@ const AuthProvider = ({ children } : { children: React.ReactNode }) => {
     const [user, setUser] = useState<IFrontendUser | null>(null);
 
     useEffect(() => {        
-        const tok = SecureStore.getItem("tok");
+        verify();
+    }, []);
+
+    async function verify() {
+        const tok = await getAuthTok();
         if(tok) {
             UserApi_Verify(tok)
                 .then((res) => login({ user: res.data.user, token: tok }))
                 .catch(() => SecureStore.deleteItemAsync("tok"));
         }
-    }, []);
+    }
 
     async function login(data: RUserLogin_Ok) {
         setUser(data.user);

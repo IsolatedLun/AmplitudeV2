@@ -32,8 +32,7 @@ const ImageInput = (props: IImageInput) => {
         if(!req.granted) return;
 
         const res = await ImagePicker.launchImageLibraryAsync({ quality: 1, allowsEditing: true });
-        if(res.canceled)
-            return props.onInput({ uri: "", name: "", type: "" });
+        if(res.canceled) return;
         
         const uri: string = res.assets[0].uri;
         const f: File = new File(Paths.cache, uri);

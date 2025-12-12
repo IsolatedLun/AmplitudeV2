@@ -6,16 +6,21 @@ meta {
 
 put {
   url: http://localhost:{{port}}/songs/edit/:id
-  body: none
+  body: multipartForm
   auth: bearer
 }
 
 params:path {
-  id: 
+  id: 693c3e6bace2acb6fa44589a
 }
 
 auth:bearer {
   token: {{globalJwtKey}}
+}
+
+body:multipart-form {
+  title: helloUpdated
+  image: @file(C:\Users\user\Downloads\image2.jpg)
 }
 
 settings {

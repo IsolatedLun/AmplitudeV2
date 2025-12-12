@@ -19,5 +19,5 @@ export const SongApi_UploadSong = (data: FormData, tok: string) => fetch(
 
 export const SongApi_EditSong = (id: string, data: FormData, tok: string) => fetch(
     SERVER_URL + `/songs/edit/${id}`,
-    { method: "PUT", body: data, headers: createAuthHeader(tok) }
+    { method: "POST", body: data, headers: createAuthHeader(tok) }
 );

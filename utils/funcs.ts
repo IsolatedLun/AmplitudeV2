@@ -1,3 +1,21 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
+
+export async function getAuthTok() {
+    if(Platform.OS === "web")
+        return await AsyncStorage.getItem("tok");
+    else
+        return SecureStore.getItem("tok");
+}
+
+export function setAuthTok(tok: string) {
+    if(Platform.OS === "web")
+        AsyncStorage.setItem("tok", tok);
+    else
+        SecureStore.setItem("tok", tok);
+}
+
 export function capitalizeSentence(x: string): string {
     return x.slice(0, 1).toUpperCase() + x.slice(1);
 }

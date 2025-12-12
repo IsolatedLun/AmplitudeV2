@@ -23,9 +23,10 @@ export function optimizeImage(buf: Buffer<ArrayBufferLike>): Promise<Buffer<Arra
 export function createPutObjectCommand(
         buf: Buffer<ArrayBufferLike>, 
         path: string, 
-        file: any // Express.Multer.File
+        file: Express.Multer.File,
+        exists: boolean = false
 ): [PutObjectCommand, string] {
-    const key = path + generateRandomUUID();
+    const key = path + (!exists ? generateRandomUUID() : "");
     return [
         new PutObjectCommand({
             Bucket: BUCKET_NAME,

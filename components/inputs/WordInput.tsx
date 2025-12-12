@@ -1,7 +1,7 @@
 import { capitalizeSentence } from "@/utils/funcs";
 import { TThemeSpec } from "@/utils/types";
 import { useContext, useEffect, useState } from "react";
-import { TextInput, View } from "react-native";
+import { Platform, TextInput, View } from "react-native";
 import { ColorSchemeContext } from "../contexts/ColorSchemeContext";
 import { ETypography_FontSize, ETypography_Theme } from "../typography/types";
 import Typo from "../typography/Typo";
@@ -53,6 +53,7 @@ const WordInput = (props: IWordInput) => {
                     color: theme.default,
                     backgroundColor: _themes[props.theme ?? EWordInputTheme.Primary].bgClr,
                     borderColor: themeState,
+                    paddingBlock: Platform.OS === "web" ? 12 : 0,
                     paddingInlineStart: 16,
                     borderRadius: _borderRadius[props.borderRadiusMode ?? EWordInputBorderRadius.Cube],
                     borderWidth: _borderThickness[props.borderThicknessMode ?? EWordInputBorderThickness.Default]

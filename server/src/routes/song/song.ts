@@ -144,7 +144,7 @@ SongRouter.post("/upload", jwtProtectedRoute, songUploadMiddleWare, async(req, r
     }
 });
 
-SongRouter.put("/edit/:id", jwtProtectedRoute, songUploadMiddleWare, async(req, res) => {
+SongRouter.post("/edit/:id", jwtProtectedRoute, songUploadMiddleWare, async(req, res) => {
     const { id } = req.params as { id: string };
     if(!ObjectId.isValid(id))
         return res.status(400).send({ error: `<${id}> is not a valid id` });
@@ -161,8 +161,9 @@ SongRouter.put("/edit/:id", jwtProtectedRoute, songUploadMiddleWare, async(req, 
             const imageBuffer = await optimizeImage(req.files.image[0].buffer);
             const [imageCommand, imageKey] = createPutObjectCommand(
                 imageBuffer, 
-                envVariables.awsSongImageBucketName, 
-                req.files.image[0]
+                song.image, 
+                req.files.image[0],
+                true
             );
             
             data["image"] = imageKey;
@@ -172,8 +173,9 @@ SongRouter.put("/edit/:id", jwtProtectedRoute, songUploadMiddleWare, async(req, 
         if(req.files && "audio" in req.files) {
             const [audioCommand, audioKey] = createPutObjectCommand(
                 req.files.audio[0].buffer, 
-                envVariables.awsSongAudioBucketName, 
-                req.files.audio[0]
+                song.audio, 
+                req.files.audio[0],
+                true
             );
     
             data["audio"] = audioKey;

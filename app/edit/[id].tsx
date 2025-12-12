@@ -31,8 +31,8 @@ const EditTab = () => {
         setLoadedInitialValues({
             title: data.title,
             author: data.author,
-            image: { uri: imageDownloadFile.uri, name: "temp.jpg", type: imageDownloadFile.type },
-            audio: { uri: audioDownloadFile.uri, name: "temp.mp3", type: audioDownloadFile.type }
+            image: { uri: imageDownloadFile.uri, name: "temp.jpg", type: imageDownloadFile.type } as any,
+            audio: { uri: audioDownloadFile.uri, name: "temp.mp3", type: audioDownloadFile.type } as any
         });
     }
 
@@ -47,13 +47,12 @@ const EditTab = () => {
         data.append("author", v.author);
         data.append("image", v.image as any);
         data.append("audio", v.audio as any);
-
         
         setIsUploading(true);
         const tok = SecureStore.getItem("tok");
         SongApi_EditSong(id, data, tok!)
             .then(() => router.replace(`/player/${id}`))
-            .catch((err: any) => console.error(err))
+            .catch((err: any) => console.log(err))
             .finally(() => setIsUploading(false));
     }
 
