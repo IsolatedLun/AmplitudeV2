@@ -42,6 +42,20 @@ const SignupPage = () => {
                                     Sign up
                                 </Typo>
                             </View>
+
+                            {
+                                signupError 
+                                ? (
+                                    <Typo 
+                                        style={{ textAlign: "center" }}
+                                        theme={ETypography_Theme.Error}
+                                    >
+                                        { signupError }
+                                    </Typo>
+                                )
+                                : null
+                            }
+
                             <View style={styles.formContainer}>
                                 <WordInput
                                     title="Username"
@@ -75,18 +89,6 @@ const SignupPage = () => {
                             <View style={styles.loginSubmitContainer}>
                                 <Btn text="Sign up" icon="login-variant" onPress={submitForm} />
                                 <Anchor text="Already have an account?" href="./login" />
-                                {
-                                    signupError 
-                                    ? (
-                                        <Typo 
-                                            style={{ textAlign: "center" }}
-                                            theme={ETypography_Theme.Error}
-                                        >
-                                            { signupError }
-                                        </Typo>
-                                    )
-                                    : null
-                                }
                             </View>
                         </CenterContainer>
                     )

@@ -49,7 +49,7 @@ const SongCard = (props: IFrontendSongPreview & IFrontEndSongLocal) => {
                     <Image source={{ uri: props.image }} style={{ ...styles.image, borderRadius: styling.borderRadius.cubeRadius }} />
                     <View style={styles.textContainer}>
                         <Typo 
-                            textProps={{ numberOfLines: 2 }} 
+                            textProps={{ numberOfLines: 2, ellipsizeMode: "tail" }} 
                             fontSize={ETypography_FontSize.Large}
                             fontType={ETypography_FontType.Bold}
                         >
